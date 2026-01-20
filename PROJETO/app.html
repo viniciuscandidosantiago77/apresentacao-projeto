@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeuCofre Seguro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f8fafc; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .page-content { display: none; }
+        .page-content.active { display: block; }
+        .modal { display: none; }
+        .modal.active { display: flex; }
+    </style>
+</head>
+
+<body class="bg-gray-100 font-sans">
+
+    <div class="flex h-screen overflow-hidden bg-white">
+
+        <nav class="w-20 bg-gray-900 text-gray-400 flex flex-col justify-between shadow-xl">
+            <div class="flex flex-col items-center">
+                <a href="#" class="h-20 w-full flex items-center justify-center text-indigo-400">
+                    <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" /></svg>
+                </a>
+                
+                <ul class="flex flex-col items-center space-y-2">
+                    <li class="nav-l1-item active relative" data-target-l1="cofre-pessoal">
+                        <a href="#" class="h-14 w-14 flex items-center justify-center text-white bg-gray-700 rounded-2xl transition-all duration-200">
+                            <ion-icon name="keypad" class="text-2xl"></ion-icon>
+                        </a>
+                    </li>
+                    <li class="nav-l1-item relative" data-target-l1="page-relatorios">
+                        <a href="#" class="h-14 w-14 flex items-center justify-center rounded-2xl hover:bg-gray-700 hover:text-white transition-all duration-200">
+                            <ion-icon name="shield-checkmark" class="text-2xl"></ion-icon>
+                        </a>
+                    </li>
+                    <li class="nav-l1-item relative" data-target-l1="page-compartilhados">
+                        <a href="#" class="h-14 w-14 flex items-center justify-center rounded-2xl hover:bg-gray-700 hover:text-white transition-all duration-200">
+                            <ion-icon name="people" class="text-2xl"></ion-icon>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="flex flex-col items-center pb-6">
+                <a href="login.html" class="h-14 w-14 flex items-center justify-center rounded-2xl text-red-400 hover:bg-red-700 hover:text-white transition-all duration-200">
+                    <ion-icon name="log-out-outline" class="text-2xl"></ion-icon>
+                </a>
+            </div>
+        </nav>
+
+        <nav id="sidebar-l2" class="w-64 bg-white border-r border-gray-100 flex-shrink-0">
+            <div class="p-6">
+                <h2 class="text-xl font-bold text-gray-900" id="cofre-titulo">Cofre Pessoal</h2>
+            </div>
+
+            <div class="px-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#" class="nav-l2-item flex items-center space-x-3 px-3 py-2 bg-indigo-50 text-indigo-700 rounded-lg" data-target="page-senhas">
+                            <ion-icon name="lock-closed" class="text-xl"></ion-icon><span class="font-medium">Senhas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-l2-item flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-800 rounded-lg" data-target="page-notas">
+                            <ion-icon name="document-text" class="text-xl"></ion-icon><span class="font-medium">Notas Seguras</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-l2-item flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-800 rounded-lg" data-target="page-cartoes">
+                            <ion-icon name="card" class="text-xl"></ion-icon><span class="font-medium">Cartões</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-l2-item flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-800 rounded-lg" data-target="page-enderecos">
+                            <ion-icon name="location" class="text-xl"></ion-icon><span class="font-medium">Endereços</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-l2-item flex items-center space-x-3 px-3 py-2 text-gray-600 hover:bg-gray-50 hover:text-gray-800 rounded-lg" data-target="page-documentos">
+                            <ion-icon name="file-tray-full-outline" class="text-xl"></ion-icon><span class="font-medium">Documentos</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+                
+        </nav>
+
+        <main class="flex-1 overflow-y-auto bg-gray-100">
+
+            <div id="page-senhas" class="page-content active">
+                <div class="p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <div><h1 class="text-3xl font-bold text-gray-900">Senhas</h1><p class="text-gray-600">Todos os seus logins e senhas seguras.</p></div>
+                        <button data-modal-target="modal-senha" class="open-modal-btn flex items-center space-x-2 bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-indigo-700 transition duration-200">
+                            <ion-icon name="add" class="text-xl"></ion-icon><span>Adicionar Senha</span>
+                        </button>
+                    </div>
+                    <div class="mb-6"><input type="text" placeholder="Buscar em 'Cofre Pessoal'..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></div>
+                    <div class="bg-white rounded-lg shadow border border-gray-200">
+                        <ul class="divide-y divide-gray-200" id="lista-senhas"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="page-notas" class="page-content">
+                <div class="p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <div><h1 class="text-3xl font-bold text-gray-900">Notas Seguras</h1><p class="text-gray-600">Suas notas criptografados.</p></div>
+                        <button data-modal-target="modal-nota" class="open-modal-btn flex items-center space-x-2 bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-indigo-700 transition duration-200">
+                            <ion-icon name="add" class="text-xl"></ion-icon><span>Adicionar Nota</span>
+                        </button>
+                    </div>
+                    <div class="bg-white rounded-lg shadow border border-gray-200" id="lista-notas-container"></div>
+                </div>
+            </div>
+
+            <div id="page-cartoes" class="page-content">
+                <div class="p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <div><h1 class="text-3xl font-bold text-gray-900">Cartões</h1><p class="text-gray-600">Seus cartões de crédito e débito.</p></div>
+                        <button data-modal-target="modal-cartao" class="open-modal-btn flex items-center space-x-2 bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-indigo-700 transition duration-200">
+                            <ion-icon name="add" class="text-xl"></ion-icon><span>Adicionar Cartão</span>
+                        </button>
+                    </div>
+                     <div class="bg-white rounded-lg shadow border border-gray-200" id="lista-cartoes-container"></div>
+                </div>
+            </div>
+
+            <div id="page-enderecos" class="page-content">
+                 <div class="p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <div><h1 class="text-3xl font-bold text-gray-900">Endereços</h1><p class="text-gray-600">Seus endereços para preenchimento.</p></div>
+                        <button data-modal-target="modal-endereco" class="open-modal-btn flex items-center space-x-2 bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-indigo-700 transition duration-200">
+                            <ion-icon name="add" class="text-xl"></ion-icon><span>Adicionar Endereço</span>
+                        </button>
+                    </div>
+                     <div class="bg-white rounded-lg shadow border border-gray-200" id="lista-enderecos-container"></div>
+                </div>
+            </div>
+            
+            <div id="page-documentos" class="page-content">
+                <div class="p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <div><h1 class="text-3xl font-bold text-gray-900">Documentos</h1><p class="text-gray-600 dark:text-gray-400">Seus arquivos e documentos seguros (uploads).</p></div>
+                        <button data-modal-target="modal-documento" class="open-modal-btn flex items-center space-x-2 bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-indigo-700 transition duration-200">
+                            <ion-icon name="add" class="text-xl"></ion-icon><span>Adicionar Documento</span>
+                        </button>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700" id="lista-documentos-container"></div>
+                </div>
+            </div>
+
+            <div id="page-relatorios" class="page-content">
+                <div class="p-8">
+                    <h1 class="text-3xl font-bold text-gray-900 mb-6">Relatório de Segurança</h1>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8" id="relatorio-cards-container"></div>
+                    <div class="bg-white rounded-lg shadow border border-gray-200">
+                        <ul class="divide-y divide-gray-200" id="relatorio-lista-container"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="page-compartilhados" class="page-content">
+                <div class="p-8">
+                    <div class="flex justify-between items-center mb-8">
+                        <div><h1 class="text-3xl font-bold text-gray-900">Compartilhamento Seguro</h1><p class="text-gray-600">Gerencie os itens que você compartilhou e os que foram compartilhados com você.</p></div>
+                        <button data-modal-target="modal-compartilhar" class="open-modal-btn flex items-center space-x-2 bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-indigo-700 transition duration-200">
+                            <ion-icon name="share-social-outline" class="text-xl"></ion-icon><span>Compartilhar Item</span>
+                        </button>
+                    </div>
+                    <div id="lista-compartilhados-container"></div>
+                </div>
+            </div>
+            
+        </main>
+    </div>
+
+    <div id="modal-senha" class="modal fixed inset-0 bg-gray-900 bg-opacity-75 items-center justify-center z-50 overflow-y-auto p-4">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-6 relative my-8">
+            <button class="close-modal-btn absolute top-4 right-4 text-gray-500 hover:text-gray-800"><ion-icon name="close" class="text-2xl"></ion-icon></button>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Adicionar Novo Login</h2>
+            <form action="#" method="POST" class="space-y-4">
+                <div><label for="titulo-senha" class="block text-sm font-medium text-gray-700">Título</label><input type="text" id="titulo-senha" placeholder="Ex: Google, Facebook, etc." class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"></div>
+                
+                <div>
+                    <label for="login" class="block text-sm font-medium text-gray-700">Login</label>
+                    <div class="relative mt-1">
+                        <input type="text" id="login" placeholder="Ex: seu.email@exemplo.com" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 pr-10">
+                        <button type="button" class="copy-btn-modal absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-indigo-600" data-copy-target="#login">
+                            <ion-icon name="clipboard-outline" class="text-xl"></ion-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="modal-output-senha" class="block text-sm font-medium text-gray-700">Senha</label>
+                    <div class="relative mt-1">
+                        <input id="modal-output-senha" name="senha" type="text" readonly class="w-full text-lg font-mono bg-gray-100 p-3 rounded-lg border-gray-300 pr-10">
+                        <button id="modal-copiar-senha-btn" type="button" class="copy-btn-modal absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-indigo-600" data-copy-target="#modal-output-senha">
+                            <ion-icon name="clipboard-outline" class="text-xl"></ion-icon>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <div class="mb-4"><label for="modal-comprimento" class="flex justify-between items-center text-sm font-medium text-gray-700"><span>Comprimento</span><span id="modal-comprimento-valor" class="text-base font-bold text-indigo-600">16</span></label><input id="modal-comprimento" type="range" min="8" max="64" value="16" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"></div>
+                    <div class="grid grid-cols-2 gap-3"><label class="flex items-center space-x-2"><input id="modal-opt-maiusculas" type="checkbox" checked class="h-4 w-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500"><span class="text-sm text-gray-700">Maiúsculas (A-Z)</span></label><label class="flex items-center space-x-2"><input id="modal-opt-minusculas" type="checkbox" checked class="h-4 w-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500"><span class="text-sm text-gray-700">Minúsculas (a-z)</span></label><label class="flex items-center space-x-2"><input id="modal-opt-numeros" type="checkbox" checked class="h-4 w-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500"><span class="text-sm text-gray-700">Números (0-9)</span></label><label class="flex items-center space-x-2"><input id="modal-opt-simbolos" type="checkbox" checked class="h-4 w-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500"><span class="text-sm text-gray-700">Símbolos (!@#)</span></label></div>
+                    <button id="modal-gerar-senha-btn" type="button" class="w-full py-2 px-4 mt-4 bg-gray-100 text-indigo-600 font-medium rounded-lg hover:bg-gray-200 transition duration-200 text-sm">Gerar Nova Senha</button>
+                </div>
+                
+                <div>
+                    <label for="url" class="block text-sm font-medium text-gray-700">URL do Site</label>
+                    <div class="relative mt-1">
+                        <input type="text" id="url" placeholder="Ex: https://www.google.com" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 pr-10">
+                        <button type="button" class="copy-btn-modal absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-indigo-600" data-copy-target="#url">
+                            <ion-icon name="clipboard-outline" class="text-xl"></ion-icon>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="pt-4 flex justify-between">
+                    <button type="button" id="delete-senha-btn" class="px-4 py-2 bg-red-600 text-white font-medium rounded-md hover:bg-red-700" style="display: none;">Excluir</button>
+                    <div class="space-x-3">
+                        <button type="button" class="close-modal-btn px-4 py-2 bg-gray-100 text-gray-700 font-medium rounded-md hover:bg-gray-200">Cancelar</button>
+                        <button type="submit" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-nota" class="modal fixed inset-0 bg-gray-900 bg-opacity-75 items-center justify-center z-50 overflow-y-auto p-4">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-6 relative my-8">
+            <button class="close-modal-btn absolute top-4 right-4 text-gray-500 hover:text-gray-800"><ion-icon name="close" class="text-2xl"></ion-icon></button>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Adicionar Nova Nota Segura</h2>
+            <form action="#" method="POST" class="space-y-4">
+                <div><label for="titulo-nota" class="block text-sm font-medium text-gray-700">Título da Nota</label><input type="text" id="titulo-nota" placeholder="Ex: Chaves de API, Receita Secreta" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"></div>
+                
+                <div>
+                    <label for="conteudo-nota" class="block text-sm font-medium text-gray-700">Conteúdo</label>
+                    <div class="relative mt-1">
+                        <textarea id="conteudo-nota" rows="8" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 pr-10" placeholder="Digite sua nota segura aqui..."></textarea>
+                        <button type="button" class="copy-btn-modal absolute top-3 right-3 text-gray-500 hover:text-indigo-600" data-copy-target="#conteudo-nota">
+                            <ion-icon name="clipboard-outline" class="text-xl"></ion-icon>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="pt-4 flex justify-between">
+                    <button type="button" id="delete-nota-btn" class="px-4 py-2 bg-red-600 text-white font-medium rounded-md hover:bg-red-700" style="display: none;">Excluir</button>
+                    <div class="space-x-3">
+                        <button type="button" class="close-modal-btn px-4 py-2 bg-gray-100 text-gray-700 font-medium rounded-md hover:bg-gray-200">Cancelar</button>
+                        <button type="submit" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700">Salvar Nota</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div id="modal-cartao" class="modal fixed inset-0 bg-gray-900 bg-opacity-75 items-center justify-center z-50 overflow-y-auto p-4">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-6 relative my-8">
+            <button class="close-modal-btn absolute top-4 right-4 text-gray-500 hover:text-gray-800"><ion-icon name="close" class="text-2xl"></ion-icon></button>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Adicionar Novo Cartão</h2>
+            <form action="#" method="POST" class="space-y-4">
+                <div><label for="nome-cartao" class="block text-sm font-medium text-gray-700">Nome do Cartão (Apelido)</label><input type="text" id="nome-cartao" placeholder="Ex: Cartão Pessoal Visa" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"></div>
+                
+                <div>
+                    <label for="titular-cartao" class="block text-sm font-medium text-gray-700">Nome no Cartão</label>
+                    <div class="relative mt-1">
+                        <input type="text" id="titular-cartao" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 pr-10">
+                        <button type="button" class="copy-btn-modal absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-indigo-600" data-copy-target="#titular-cartao">
+                            <ion-icon name="clipboard-outline" class="text-xl"></ion-icon>
+                        </button>
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="numero-cartao" class="block text-sm font-medium text-gray-700">Número do Cartão</label>
+                    <div class="relative mt-1">
+                        <input type="text" id="numero-cartao" placeholder="xxxx xxxx xxxx xxxx" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 pr-10">
+                        <button type="button" class="copy-btn-modal absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-indigo-600" data-copy-target="#numero-cartao">
+                            <ion-icon name="clipboard-outline" class="text-xl"></ion-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="validade-cartao" class="block text-sm font-medium text-gray-700">Validade (MM/AA)</label>
+                        <div class="relative mt-1">
+                            <input type="text" id="validade-cartao" placeholder="MM/AA" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 pr-10">
+                            <button type="button" class="copy-btn-modal absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-indigo-600" data-copy-target="#validade-cartao">
+                                <ion-icon name="clipboard-outline" class="text-xl"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="cvv-cartao" class="block text-sm font-medium text-gray-700">CVV</label>
+                        <div class="relative mt-1">
+                            <input type="text" id="cvv-cartao" placeholder="***" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 pr-10">
+                            <button type="button" class="copy-btn-modal absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-indigo-600" data-copy-target="#cvv-cartao">
+                                <ion-icon name="clipboard-outline" class="text-xl"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pt-4 flex justify-between">
+                    <button type="button" id="delete-cartao-btn" class="px-4 py-2 bg-red-600 text-white font-medium rounded-md hover:bg-red-700" style="display: none;">Excluir</button>
+                    <div class="space-x-3">
+                        <button type="button" class="close-modal-btn px-4 py-2 bg-gray-100 text-gray-700 font-medium rounded-md hover:bg-gray-200">Cancelar</button>
+                        <button type="submit" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700">Salvar Cartão</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div id="modal-endereco" class="modal fixed inset-0 bg-gray-900 bg-opacity-75 items-center justify-center z-50 overflow-y-auto p-4">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-6 relative my-8">
+            <button class="close-modal-btn absolute top-4 right-4 text-gray-500 hover:text-gray-800"><ion-icon name="close" class="text-2xl"></ion-icon></button>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Adicionar Novo Endereço</h2>
+            <form action="#" method="POST" class="space-y-4">
+                <div><label for="titulo-endereco" class="block text-sm font-medium text-gray-700">Título do Endereço</label><input type="text" id="titulo-endereco" placeholder="Ex: Casa, Trabalho" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"></div>
+                
+                <div>
+                    <label for="rua-endereco" class="block text-sm font-medium text-gray-700">Rua</label>
+                    <div class="relative mt-1">
+                        <input type="text" id="rua-endereco" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 pr-10">
+                        <button type="button" class="copy-btn-modal absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-indigo-600" data-copy-target="#rua-endereco">
+                            <ion-icon name="clipboard-outline" class="text-xl"></ion-icon>
+                        </button>
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="numero-endereco" class="block text-sm font-medium text-gray-700">Número</label>
+                    <div class="relative mt-1">
+                        <input type="text" id="numero-endereco" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 pr-10">
+                        <button type="button" class="copy-btn-modal absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-indigo-600" data-copy-target="#numero-endereco">
+                            <ion-icon name="clipboard-outline" class="text-xl"></ion-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="complemento-endereco" class="block text-sm font-medium text-gray-700">Complemento</label>
+                    <div class="relative mt-1">
+                        <input type="text" id="complemento-endereco" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 pr-10">
+                        <button type="button" class="copy-btn-modal absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-indigo-600" data-copy-target="#complemento-endereco">
+                            <ion-icon name="clipboard-outline" class="text-xl"></ion-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="cidade-endereco" class="block text-sm font-medium text-gray-700">Cidade</label>
+                        <div class="relative mt-1">
+                            <input type="text" id="cidade-endereco" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 pr-10">
+                            <button type="button" class="copy-btn-modal absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-indigo-600" data-copy-target="#cidade-endereco">
+                                <ion-icon name="clipboard-outline" class="text-xl"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="estado-endereco" class="block text-sm font-medium text-gray-700">Estado</label>
+                        <div class="relative mt-1">
+                            <input type="text" id="estado-endereco" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 pr-10">
+                            <button type="button" class="copy-btn-modal absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-indigo-600" data-copy-target="#estado-endereco">
+                                <ion-icon name="clipboard-outline" class="text-xl"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="cep-endereco" class="block text-sm font-medium text-gray-700">CEP</label>
+                        <div class="relative mt-1">
+                            <input type="text" id="cep-endereco" placeholder="xxxxx-xxx" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 pr-10">
+                            <button type="button" class="copy-btn-modal absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-indigo-600" data-copy-target="#cep-endereco">
+                                <ion-icon name="clipboard-outline" class="text-xl"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="pais-endereco" class="block text-sm font-medium text-gray-700">País</label>
+                        <div class="relative mt-1">
+                            <input type="text" id="pais-endereco" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 pr-10">
+                            <button type="button" class="copy-btn-modal absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-indigo-600" data-copy-target="#pais-endereco">
+                                <ion-icon name="clipboard-outline" class="text-xl"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pt-4 flex justify-between">
+                    <button type="button" id="delete-endereco-btn" class="px-4 py-2 bg-red-600 text-white font-medium rounded-md hover:bg-red-700" style="display: none;">Excluir</button>
+                    <div class="space-x-3">
+                        <button type="button" class="close-modal-btn px-4 py-2 bg-gray-100 text-gray-700 font-medium rounded-md hover:bg-gray-200">Cancelar</button>
+                        <button type="submit" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700">Salvar Endereço</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div id="modal-compartilhar" class="modal fixed inset-0 bg-gray-900 bg-opacity-75 items-center justify-center z-50 overflow-y-auto p-4">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-6 relative my-8">
+            <button class="close-modal-btn absolute top-4 right-4 text-gray-500 hover:text-gray-800"><ion-icon name="close" class="text-2xl"></ion-icon></button>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Compartilhar Item Seguro</h2>
+            <form action="#" method="POST" class="space-y-4">
+                <div>
+                    <label for="item-a-compartilhar" class="block text-sm font-medium text-gray-700">Item a compartilhar</label>
+                    <select id="item-a-compartilhar" name="item-a-compartilhar" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white">
+                        </select>
+                </div>
+                <div>
+                    <label for="email-destinatario" class="block text-sm font-medium text-gray-700">Email do Destinatário</label>
+                    <input type="email" id="email-destinatario" name="email-destinatario" placeholder="Digite o email da pessoa" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div>
+                    <label for="permissao-compartilhamento" class="block text-sm font-medium text-gray-700">Permissão</label>
+                    <select id="permissao-compartilhamento" name="permissao-compartilhamento" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white">
+                        <option value="leitura">Somente Leitura</option>
+                        <option value="edicao">Pode Editar</option>
+                    </select>
+                </div>
+                <div class="pt-4 flex justify-end space-x-3">
+                    <button type="button" class="close-modal-btn px-4 py-2 bg-gray-100 text-gray-700 font-medium rounded-md hover:bg-gray-200">Cancelar</button>
+                    <button type="submit" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700">Compartilhar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div id="modal-documento" class="modal fixed inset-0 bg-black bg-opacity-75 items-center justify-center z-50 overflow-y-auto p-4">
+        <div class="bg-gray-800 rounded-lg shadow-xl w-full max-w-lg p-6 relative my-8 border border-gray-700">
+            <button class="close-modal-btn absolute top-4 right-4 text-gray-400 hover:text-white"><ion-icon name="close" class="text-2xl"></ion-icon></button>
+            <h2 class="text-2xl font-bold text-white mb-6">Adicionar Novo Documento</h2>
+            <form action="#" method="POST" class="space-y-4">
+                <div><label for="titulo-documento" class="block text-sm font-medium text-gray-300">Título do Documento</label><input type="text" id="titulo-documento" placeholder="Ex: Passaporte, CNH, Chave API" class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 text-white rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500"></div>
+                <div>
+                    <label for="arquivo-documento" class="block text-sm font-medium text-gray-300">Arquivo</label>
+                    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-600 border-dashed rounded-md">
+                        <div class="space-y-1 text-center">
+                            <ion-icon name="document-attach-outline" class="mx-auto h-12 w-12 text-gray-400"></ion-icon>
+                            <div class="flex text-sm text-gray-400">
+                                <label for="file-upload" class="relative cursor-pointer bg-gray-700 rounded-md font-medium text-indigo-400 hover:text-indigo-300 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-800 focus-within:ring-indigo-500 px-1">
+                                    <span id="file-upload-text">Selecione um arquivo</span>
+                                    <input id="file-upload" name="file-upload" type="file" class="sr-only">
+                                </label>
+                                <p class="pl-1">ou arraste e solte</p>
+                            </div>
+                            <p class="text-xs text-gray-500">PDF, PNG, JPG, ZIP, etc. (Máx 10MB)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pt-4 flex justify-between">
+                    <button type="button" id="delete-documento-btn" class="px-4 py-2 bg-red-600 text-white font-medium rounded-md hover:bg-red-700" style="display: none;">Excluir</button>
+                    <div class="space-x-3">
+                        <button type="button" class="close-modal-btn px-4 py-2 bg-gray-700 text-gray-300 font-medium rounded-md hover:bg-gray-600">Cancelar</button>
+                        <button type="submit" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700">Salvar Documento</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- BANCO DE DADOS (PROTÓTIPO) ---
+            const getDB = (key) => JSON.parse(localStorage.getItem(key) || '[]');
+            const setDB = (key, data) => localStorage.setItem(key, JSON.stringify(data));
+
+            // ==================================================================
+            // --- 1. LÓGICA DE RENDERIZAÇÃO (CARREGAR DADOS) ---
+            // ==================================================================
+            
+            function renderSenhas() {
+                const senhas = getDB('db_senhas');
+                const list = document.getElementById('lista-senhas');
+                if (!list) return;
+                list.innerHTML = ''; 
+                if (senhas.length === 0) {
+                    list.innerHTML = `<li class="p-4 text-center text-gray-500 italic">Nenhuma senha adicionada ainda.</li>`;
+                    return;
+                }
+                senhas.forEach(senha => {
+                    const inicial = (senha.titulo && senha.titulo.charAt(0).toUpperCase()) || '?';
+                    const colors = ['bg-red-100 text-red-600', 'bg-blue-100 text-blue-600', 'bg-green-100 text-green-600', 'bg-yellow-100 text-yellow-600', 'bg-purple-100 text-purple-600'];
+                    const color = colors[Math.abs(inicial.charCodeAt(0) % colors.length)];
+                    const li = document.createElement('li');
+                    li.className = 'item-senha flex items-center justify-between p-4 hover:bg-gray-50 cursor-pointer';
+                    li.dataset.id = senha.id;
+                    li.innerHTML = `
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 ${color} rounded-full flex items-center justify-center"><span class="text-xl font-bold">${inicial}</span></div>
+                            <div>
+                                <p class="text-lg font-semibold text-gray-800">${senha.titulo}</p>
+                                <p class="text-sm text-gray-600">${senha.login}</p>
+                            </div>
+                        </div>
+                        <ion-icon name="chevron-forward-outline" class="text-gray-400"></ion-icon>
+                    `;
+                    li.addEventListener('click', () => handleEdit('senha', senha.id));
+                    list.appendChild(li);
+                });
+            }
+
+            function renderNotas() {
+                const notas = getDB('db_notas');
+                const container = document.getElementById('lista-notas-container');
+                if (!container) return;
+                container.innerHTML = ''; 
+                if (notas.length === 0) {
+                    container.innerHTML = `<p class="text-gray-500 italic p-4">Nenhuma nota segura ainda.</p>`;
+                } else {
+                    const list = document.createElement('ul');
+                    list.className = 'divide-y divide-gray-200';
+                    notas.forEach(nota => {
+                        const li = document.createElement('li');
+                        li.className = 'item-nota flex items-center justify-between p-4 hover:bg-gray-50 cursor-pointer';
+                        li.dataset.id = nota.id;
+                        li.innerHTML = `
+                            <div class="flex items-center space-x-4">
+                                <ion-icon name="document-text-outline" class="text-2xl text-gray-500"></ion-icon>
+                                <div><p class="text-lg font-semibold text-gray-800">${nota.titulo}</p></div>
+                            </div>
+                            <ion-icon name="chevron-forward-outline" class="text-gray-400"></ion-icon>
+                        `;
+                        li.addEventListener('click', () => handleEdit('nota', nota.id));
+                        list.appendChild(li);
+                    });
+                    container.appendChild(list);
+                }
+            }
+            
+            function renderCartoes() {
+                const cartoes = getDB('db_cartoes'); // Lê de db_cartoes
+                const container = document.getElementById('lista-cartoes-container');
+                if (!container) return;
+                container.innerHTML = ''; 
+                if (cartoes.length === 0) {
+                    container.innerHTML = `<p class="text-gray-500 italic p-4">Nenhum cartão adicionado ainda.</p>`;
+                } else {
+                    const list = document.createElement('ul');
+                    list.className = 'divide-y divide-gray-200';
+                    cartoes.forEach(cartao => {
+                        const li = document.createElement('li');
+                        li.className = 'item-cartao flex items-center justify-between p-4 hover:bg-gray-50 cursor-pointer';
+                        li.dataset.id = cartao.id;
+                        li.innerHTML = `
+                            <div class="flex items-center space-x-4">
+                                <ion-icon name="card-outline" class="text-2xl text-gray-500"></ion-icon>
+                                <div>
+                                    <p class="text-lg font-semibold text-gray-800">${cartao.nome}</p>
+                                    <p class="text-sm text-gray-600">**** **** **** ${cartao.numero ? cartao.numero.slice(-4) : '????'}</p>
+                                </div>
+                            </div>
+                            <ion-icon name="chevron-forward-outline" class="text-gray-400"></ion-icon>
+                        `;
+                        li.addEventListener('click', () => handleEdit('cartao', cartao.id));
+                        list.appendChild(li);
+                    });
+                    container.appendChild(list);
+                }
+            }
+            
+            function renderEnderecos() {
+                const enderecos = getDB('db_enderecos');
+                const container = document.getElementById('lista-enderecos-container');
+                if (!container) return;
+                container.innerHTML = ''; 
+                if (enderecos.length === 0) {
+                    container.innerHTML = `<p class="text-gray-500 italic p-4">Nenhum endereço adicionado ainda.</p>`;
+                } else {
+                    const list = document.createElement('ul');
+                    list.className = 'divide-y divide-gray-200';
+                    enderecos.forEach(endereco => {
+                        const li = document.createElement('li');
+                        li.className = 'item-endereco flex items-center justify-between p-4 hover:bg-gray-50 cursor-pointer';
+                        li.dataset.id = endereco.id;
+                        li.innerHTML = `
+                            <div class="flex items-center space-x-4">
+                                <ion-icon name="location-outline" class="text-2xl text-gray-500"></ion-icon>
+                                <div>
+                                    <p class="text-lg font-semibold text-gray-800">${endereco.titulo}</p>
+                                    <p class="text-sm text-gray-600">${endereco.rua}, ${endereco.numero} - ${endereco.cidade}</p>
+                                </div>
+                            </div>
+                            <ion-icon name="chevron-forward-outline" class="text-gray-400"></ion-icon>
+                        `;
+                        li.addEventListener('click', () => handleEdit('endereco', endereco.id));
+                        list.appendChild(li);
+                    });
+                    container.appendChild(list);
+                }
+            }
+            
+            function renderDocumentos() {
+                const documentos = getDB('db_documentos');
+                const container = document.getElementById('lista-documentos-container');
+                if (!container) return;
+                container.innerHTML = ''; 
+                if (documentos.length === 0) {
+                    container.innerHTML = `<ul class="divide-y divide-gray-200"><li class="p-4 text-center text-gray-500 italic">Nenhum documento adicionado ainda.</li></ul>`;
+                } else {
+                    const list = document.createElement('ul');
+                    list.className = 'divide-y divide-gray-200';
+                    documentos.forEach(doc => {
+                        const li = document.createElement('li');
+                        li.className = 'item-documento flex items-center justify-between p-4 hover:bg-gray-50 cursor-pointer';
+                        li.dataset.id = doc.id;
+                        li.innerHTML = `
+                            <div class="flex items-center space-x-4">
+                                <ion-icon name="document-attach-outline" class="text-2xl text-gray-500"></ion-icon>
+                                <div>
+                                    <p class="text-lg font-semibold text-gray-800">${doc.titulo}</p>
+                                    <p class="text-sm text-gray-600">${doc.fileName || 'Arquivo'}</p>
+                                </div>
+                            </div>
+                            <ion-icon name="chevron-forward-outline" class="text-gray-400"></ion-icon>
+                        `;
+                        li.addEventListener('click', () => handleEdit('documento', doc.id));
+                        list.appendChild(li);
+                    });
+                    container.appendChild(list);
+                }
+            }
+            
+            function renderRelatorios() {
+                const senhas = getDB('db_senhas');
+                const cardsContainer = document.getElementById('relatorio-cards-container');
+                const listContainer = document.getElementById('relatorio-lista-container');
+                if (!cardsContainer || !listContainer) return;
+                let fracas = senhas.filter(s => s.senha.length < 8);
+                let reutilizadas = [];
+                const passwordCounts = {};
+                senhas.forEach(s => { passwordCounts[s.senha] = (passwordCounts[s.senha] || 0) + 1; });
+                reutilizadas = senhas.filter(s => s.senha && passwordCounts[s.senha] > 1);
+                cardsContainer.innerHTML = `
+                    <div class="bg-white rounded-lg shadow border border-yellow-200 p-6"><div class="flex items-center space-x-4"><div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center"><ion-icon name="key-outline" class="text-3xl text-yellow-600"></ion-icon></div><div><p class="text-3xl font-bold text-yellow-600">${fracas.length}</p><p class="text-gray-600 font-medium">Senhas Fracas</p></div></div></div>
+                    <div class="bg-white rounded-lg shadow border border-blue-200 p-6"><div class="flex items-center space-x-4"><div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center"><ion-icon name="repeat" class="text-3xl text-blue-600"></ion-icon></div><div><p class="text-3xl font-bold text-blue-600">${reutilizadas.length}</p><p class="text-gray-600 font-medium">Senhas Reutilizadas</p></div></div></div>
+                    <div class="bg-white rounded-lg shadow border border-red-200 p-6"><div class="flex items-center space-x-4"><div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center"><ion-icon name="alert-circle" class="text-3xl text-red-600"></ion-icon></div><div><p class="text-3xl font-bold text-red-600">0</p><p class="text-gray-600 font-medium">Senha Comprometida</p></div></div></div>
+                `;
+                listContainer.innerHTML = '';
+                if (fracas.length === 0 && reutilizadas.length === 0) {
+                    listContainer.innerHTML = `<li class="p-4 text-center text-gray-500 italic">Seu cofre está ótimo!</li>`;
+                    return;
+                }
+                if (fracas.length > 0) {
+                    const li = document.createElement('li');
+                    li.className = 'p-4';
+                    li.innerHTML = `<div class="flex items-center space-x-3 mb-3"><ion-icon name="key-outline" class="text-xl text-yellow-500"></ion-icon><h2 class="text-lg font-semibold text-gray-900">Senhas Fracas</h2></div><p class="text-sm text-gray-600 ml-8 mb-4">Estas senhas são fáceis de adivinhar.</p>`;
+                    fracas.forEach(s => {
+                        const inicial = (s.titulo && s.titulo.charAt(0).toUpperCase()) || '?';
+                        li.innerHTML += `
+                            <div class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 ml-8" data-item-id="${s.id}">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center"><span class="text-xl font-bold text-yellow-600">${inicial}</span></div>
+                                    <div><p class="item-titulo text-base font-semibold text-gray-800">${s.titulo}</p><p class="item-login text-sm text-gray-600">${s.login}</p><p class="text-xs text-yellow-600 font-medium">Força: Fraca</p></div>
+                                </div>
+                                <button class="alterar-senha-btn px-4 py-2 bg-white border border-gray-300 text-gray-700 font-medium rounded-md hover:bg-gray-50 text-sm">Alterar Senha</button>
+                            </div>`;
+                    });
+                    listContainer.appendChild(li);
+                }
+                if (reutilizadas.length > 0) {
+                    const li = document.createElement('li');
+                    li.className = 'p-4';
+                    li.innerHTML = `<div class="flex items-center space-x-3 mb-3"><ion-icon name="repeat" class="text-xl text-blue-500"></ion-icon><h2 class="text-lg font-semibold text-gray-900">Senhas Reutilizadas</h2></div><p class="text-sm text-gray-600 ml-8 mb-4">Usar a mesma senha em vários sites é arriscado.</p>`;
+                    reutilizadas.forEach(s => {
+                        const inicial = (s.titulo && s.titulo.charAt(0).toUpperCase()) || '?';
+                        li.innerHTML += `
+                            <div class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 ml-8" data-item-id="${s.id}">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center"><span class="text-xl font-bold text-blue-600">${inicial}</span></div>
+                                    <div><p class="item-titulo text-base font-semibold text-gray-800">${s.titulo}</p><p class="item-login text-sm text-gray-600">${s.login}</p><p class="text-xs text-blue-600 font-medium">Reutilizada ${passwordCounts[s.senha]} vezes</p></div>
+                                </div>
+                                <button class="alterar-senha-btn px-4 py-2 bg-white border border-gray-300 text-gray-700 font-medium rounded-md hover:bg-gray-50 text-sm">Alterar Senha</button>
+                            </div>`;
+                    });
+                    listContainer.appendChild(li);
+                }
+                addAlterarSenhaListeners();
+            }
+            
+            function renderCompartilhados() {
+                const compartilhados = getDB('db_compartilhamentos');
+                const container = document.getElementById('lista-compartilhados-container');
+                if (!container) return;
+                container.innerHTML = `
+                    <div class="mb-8">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4">Itens que você compartilhou</h2>
+                        <div class="bg-white rounded-lg shadow border border-gray-200">
+                            <ul class="divide-y divide-gray-200" id="lista-compartilhados-enviados"></ul>
+                        </div>
+                    </div>`;
+                const list = document.getElementById('lista-compartilhados-enviados');
+                if (compartilhados.length === 0) {
+                    list.innerHTML = `<li class="p-4 text-center text-gray-500 italic">Você ainda não compartilhou nenhum item.</li>`;
+                } else {
+                    compartilhados.forEach(item => {
+                        const li = document.createElement('li');
+                        li.className = 'p-4 flex items-center justify-between hover:bg-gray-50';
+                        li.innerHTML = `
+                            <div class="flex items-center space-x-4">
+                                <ion-icon name="${item.tipo === 'senha' ? 'lock-closed' : 'document-text'}" class="text-2xl text-gray-500"></ion-icon>
+                                <div>
+                                    <p class="text-base font-semibold text-gray-800">${item.itemTitulo}</p>
+                                    <p class="text-sm text-gray-600">Compartilhado com: <span class="font-medium text-indigo-600">${item.email}</span> (${item.permissao})</p>
+                                </div>
+                            </div>
+                            <button class="delete-compartilhado-btn text-red-500 hover:text-red-700 text-sm font-medium" data-id="${item.id}">Revogar Acesso</button>
+                        `;
+                        list.appendChild(li);
+                    });
+                    list.querySelectorAll('.delete-compartilhado-btn').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const id = btn.dataset.id;
+                            if (confirm('Tem certeza que deseja revogar este compartilhamento?')) {
+                                let db = getDB('db_compartilhamentos');
+                                db = db.filter(i => i.id !== id);
+                                setDB('db_compartilhamentos', db);
+                                renderCompartilhados();
+                            }
+                        });
+                    });
+                }
+            }
+
+            // ==================================================================
+            // --- 2. LÓGICA DE NAVEGAÇÃO PRINCIPAL ---
+            // ==================================================================
+            
+            const navL1Links = document.querySelectorAll('.nav-l1-item');
+            const navL2Links = document.querySelectorAll('.nav-l2-item');
+            const pages = document.querySelectorAll('.page-content');
+            const sidebarL2 = document.getElementById('sidebar-l2');
+            const cofreTitulo = document.getElementById('cofre-titulo');
+
+            function showPage(targetId) {
+                pages.forEach(page => page.classList.remove('active'));
+                const targetPage = document.getElementById(targetId);
+                if (targetPage) targetPage.classList.add('active');
+                if (targetId === 'page-senhas') renderSenhas();
+                else if (targetId === 'page-notas') renderNotas();
+                else if (targetId === 'page-cartoes') renderCartoes();
+                else if (targetId === 'page-enderecos') renderEnderecos();
+                else if (targetId === 'page-documentos') renderDocumentos();
+                else if (targetId === 'page-relatorios') renderRelatorios();
+                else if (targetId === 'page-compartilhados') renderCompartilhados();
+            }
+            
+            navL1Links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    navL1Links.forEach(item => { item.querySelector('a').classList.remove('text-white', 'bg-gray-700'); item.classList.remove('active'); });
+                    link.querySelector('a').classList.add('text-white', 'bg-gray-700'); link.classList.add('active');
+                    const target = link.dataset.targetL1;
+                    if (target === 'cofre-pessoal') {
+                        sidebarL2.classList.remove('hidden');
+                        cofreTitulo.textContent = 'Cofre Pessoal';
+                        document.querySelector('.nav-l2-item[data-target="page-senhas"]').click();
+                    } else {
+                        sidebarL2.classList.add('hidden');
+                        showPage(target);
+                    }
+                });
+            });
+
+            navL2Links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    navL2Links.forEach(item => { item.classList.remove('bg-indigo-50', 'text-indigo-700'); item.classList.add('text-gray-600', 'hover:bg-gray-50'); });
+                    link.classList.add('bg-indigo-50', 'text-indigo-700'); link.classList.remove('text-gray-600', 'hover:bg-gray-50');
+                    showPage(link.dataset.target);
+                });
+            });
+
+            // ==================================================================
+            // --- 3. LÓGICA DO GERADOR DE SENHA ---
+            // ==================================================================
+            
+            const outputSenha = document.getElementById('modal-output-senha');
+            const comprimentoSlider = document.getElementById('modal-comprimento');
+            const comprimentoValor = document.getElementById('modal-comprimento-valor');
+            const optMaiusculas = document.getElementById('modal-opt-maiusculas');
+            const optMinusculas = document.getElementById('modal-opt-minusculas');
+            const optNumeros = document.getElementById('modal-opt-numeros');
+            const optSimbolos = document.getElementById('modal-opt-simbolos');
+            const gerarBtn = document.getElementById('modal-gerar-senha-btn');
+            // O botão de copiar da senha é tratado pela função genérica setupCopyButtons
+            
+            const charsets = { maiusculas: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', minusculas: 'abcdefghijklmnopqrstuvwxyz', numeros: '0123456789', simbolos: '!@#$%^&*()_+-=[]{}|;:,.<>?' };
+
+            function gerarSenhaModal() {
+                if (!outputSenha || !comprimentoSlider || !optMaiusculas || !optMinusculas || !optNumeros || !optSimbolos) return;
+                let charset = '';
+                if (optMaiusculas.checked) charset += charsets.maiusculas;
+                if (optMinusculas.checked) charset += charsets.minusculas;
+                if (optNumeros.checked) charset += charsets.numeros;
+                if (optSimbolos.checked) charset += charsets.simbolos;
+                if (charset === '') { if(outputSenha) outputSenha.value = 'Selecione uma opção!'; return; }
+                let senhaGerada = '';
+                const comprimento = comprimentoSlider.value;
+                for (let i = 0; i < comprimento; i++) {
+                    const randomIndex = Math.floor(Math.random() * charset.length);
+                    senhaGerada += charset[randomIndex];
+                }
+                outputSenha.value = senhaGerada;
+            }
+
+            if(comprimentoSlider && comprimentoValor) {
+                comprimentoSlider.addEventListener('input', (e) => { comprimentoValor.textContent = e.target.value; gerarSenhaModal(); });
+            }
+            if(gerarBtn) gerarBtn.addEventListener('click', gerarSenhaModal);
+            [optMaiusculas, optMinusculas, optNumeros, optSimbolos].forEach(opt => {
+                if(opt) opt.addEventListener('change', gerarSenhaModal);
+            });
+            
+            // ==================================================================
+            // --- 4. LÓGICA GERAL DOS MODAIS (ABRIR/FECHAR) ---
+            // ==================================================================
+            
+            const openModalBtns = document.querySelectorAll('.open-modal-btn');
+            const closeModalBtns = document.querySelectorAll('.close-modal-btn');
+            const allModals = document.querySelectorAll('.modal');
+
+            const openModal = (modalId) => {
+                const modal = document.getElementById(modalId);
+                if (modal) modal.classList.add('active');
+            };
+            
+            const closeModal = (modal) => {
+                 if(modal) {
+                    modal.classList.remove('active');
+                    const form = modal.querySelector('form');
+                    if (form) {
+                         form.reset(); 
+                         delete form.dataset.editingId; 
+                    }
+                    const title = modal.querySelector('h2');
+                    if (modal.id === 'modal-senha') {
+                        title.textContent = 'Adicionar Novo Login';
+                        document.getElementById('delete-senha-btn').style.display = 'none';
+                    } else if (modal.id === 'modal-nota') {
+                        title.textContent = 'Adicionar Nova Nota Segura';
+                        document.getElementById('delete-nota-btn').style.display = 'none';
+                    } else if (modal.id === 'modal-cartao') {
+                        title.textContent = 'Adicionar Novo Cartão';
+                        document.getElementById('delete-cartao-btn').style.display = 'none';
+                    } else if (modal.id === 'modal-endereco') {
+                        title.textContent = 'Adicionar Novo Endereço';
+                        document.getElementById('delete-endereco-btn').style.display = 'none';
+                    } else if (modal.id === 'modal-documento') {
+                        title.textContent = 'Adicionar Novo Documento';
+                        document.getElementById('delete-documento-btn').style.display = 'none';
+                    }
+                 }
+            };
+
+            openModalBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const modalId = btn.dataset.modalTarget;
+                    const modal = document.getElementById(modalId);
+                    if (!modal) return;
+                    const form = modal.querySelector('form');
+                    if(form) delete form.dataset.editingId;
+                    const title = modal.querySelector('h2');
+                    
+                    if (modalId === 'modal-senha') {
+                        title.textContent = 'Adicionar Novo Login';
+                        document.getElementById('delete-senha-btn').style.display = 'none';
+                        gerarSenhaModal(); 
+                    } else if (modalId === 'modal-nota') {
+                        title.textContent = 'Adicionar Nova Nota Segura';
+                        document.getElementById('delete-nota-btn').style.display = 'none';
+                    } else if (modalId === 'modal-cartao') {
+                        title.textContent = 'Adicionar Novo Cartão';
+                        document.getElementById('delete-cartao-btn').style.display = 'none';
+                    } else if (modalId === 'modal-endereco') {
+                        title.textContent = 'Adicionar Novo Endereço';
+                        document.getElementById('delete-endereco-btn').style.display = 'none';
+                    } else if (modalId === 'modal-documento') {
+                        title.textContent = 'Adicionar Novo Documento';
+                        document.getElementById('delete-documento-btn').style.display = 'none';
+                    } else if (modalId === 'modal-compartilhar') {
+                        title.textContent = 'Compartilhar Item Seguro';
+                        populateCompartilharSelect(); 
+                    }
+                    openModal(modalId);
+                });
+            });
+
+            closeModalBtns.forEach(btn => {
+                btn.addEventListener('click', () => { closeModal(btn.closest('.modal')); });
+            });
+            allModals.forEach(modal => {
+                modal.addEventListener('click', (event) => { if (event.target === modal) closeModal(modal); });
+            });
+
+            // ==================================================================
+            // --- 5. LÓGICA DE EDIÇÃO (HandleEdit) ---
+            // ==================================================================
+            
+            const forms = {
+                senha: document.querySelector('#modal-senha form'),
+                nota: document.querySelector('#modal-nota form'),
+                cartao: document.querySelector('#modal-cartao form'),
+                endereco: document.querySelector('#modal-endereco form'),
+                documento: document.querySelector('#modal-documento form')
+            };
+
+            function handleEdit(type, id) {
+                let dbKey = `db_${type}s`;
+                if (type === 'cartao') dbKey = 'db_cartoes'; // Correção do bug
+
+                const db = getDB(dbKey);
+                const item = db.find(i => i.id === id);
+                if (!item) return;
+                
+                const form = forms[type];
+                if (!form) return;
+                
+                const modalId = `modal-${type}`;
+                
+                if (type === 'senha') {
+                    document.getElementById('titulo-senha').value = item.titulo;
+                    document.getElementById('login').value = item.login;
+                    document.getElementById('modal-output-senha').value = item.senha;
+                    document.getElementById('url').value = item.url;
+                } else if (type === 'nota') {
+                    document.getElementById('titulo-nota').value = item.titulo;
+                    document.getElementById('conteudo-nota').value = item.conteudo;
+                } else if (type === 'cartao') {
+                    document.getElementById('nome-cartao').value = item.nome;
+                    document.getElementById('titular-cartao').value = item.titular;
+                    document.getElementById('numero-cartao').value = item.numero;
+                    document.getElementById('validade-cartao').value = item.validade;
+                    document.getElementById('cvv-cartao').value = item.cvv;
+                } else if (type === 'endereco') {
+                    document.getElementById('titulo-endereco').value = item.titulo;
+                    document.getElementById('rua-endereco').value = item.rua;
+                    document.getElementById('numero-endereco').value = item.numero;
+                    document.getElementById('complemento-endereco').value = item.complemento;
+                    document.getElementById('cidade-endereco').value = item.cidade;
+                    document.getElementById('estado-endereco').value = item.estado;
+                    document.getElementById('cep-endereco').value = item.cep;
+                    document.getElementById('pais-endereco').value = item.pais;
+                } else if (type === 'documento') {
+                    document.getElementById('titulo-documento').value = item.titulo;
+                    document.getElementById('file-upload-text').textContent = item.fileName || 'Selecione um arquivo';
+                }
+                
+                document.querySelector(`#${modalId} h2`).textContent = `Editar ${type.charAt(0).toUpperCase() + type.slice(1)}`;
+                form.dataset.editingId = id;
+                document.getElementById(`delete-${type}-btn`).style.display = 'block';
+                
+                openModal(modalId);
+            }
+
+            // ==================================================================
+            // --- 6. LÓGICA DE SALVAR (Submit Forms) ---
+            // ==================================================================
+            
+            function handleSave(e, type) {
+                e.preventDefault();
+                const form = e.target;
+                const editingId = form.dataset.editingId;
+                let dados = {};
+                let dbKey = `db_${type}s`;
+                let renderFn = () => {};
+
+                if (type === 'senha') {
+                    dados = {
+                        titulo: document.getElementById('titulo-senha').value,
+                        login: document.getElementById('login').value,
+                        senha: document.getElementById('modal-output-senha').value,
+                        url: document.getElementById('url').value
+                    };
+                    renderFn = renderSenhas;
+                } else if (type === 'nota') {
+                    dados = {
+                        titulo: document.getElementById('titulo-nota').value,
+                        conteudo: document.getElementById('conteudo-nota').value
+                    };
+                    renderFn = renderNotas;
+                } else if (type === 'cartao') {
+                    dados = {
+                        nome: document.getElementById('nome-cartao').value,
+                        titular: document.getElementById('titular-cartao').value,
+                        numero: document.getElementById('numero-cartao').value,
+                        validade: document.getElementById('validade-cartao').value,
+                        cvv: document.getElementById('cvv-cartao').value
+                    };
+                    dbKey = 'db_cartoes'; // Correção do bug
+                    renderFn = renderCartoes;
+                } else if (type === 'endereco') {
+                    dados = {
+                        titulo: document.getElementById('titulo-endereco').value,
+                        rua: document.getElementById('rua-endereco').value,
+                        numero: document.getElementById('numero-endereco').value,
+                        complemento: document.getElementById('complemento-endereco').value,
+                        cidade: document.getElementById('cidade-endereco').value,
+                        estado: document.getElementById('estado-endereco').value,
+                        cep: document.getElementById('cep-endereco').value,
+                        pais: document.getElementById('pais-endereco').value
+                    };
+                    renderFn = renderEnderecos;
+                } else if (type === 'documento') {
+                    const fileInput = document.getElementById('file-upload');
+                    let fileName = 'Arquivo'; 
+                    if (fileInput.files[0]) {
+                        fileName = fileInput.files[0].name;
+                    } else if (editingId) {
+                        const itemExistente = getDB(dbKey).find(i => i.id === editingId);
+                        if (itemExistente) fileName = itemExistente.fileName; 
+                    }
+                    dados = {
+                        titulo: document.getElementById('titulo-documento').value,
+                        fileName: fileName
+                    };
+                    renderFn = renderDocumentos;
+                } else if (type === 'compartilhamento') {
+                    const select = document.getElementById('item-a-compartilhar');
+                    const selectedOption = select.options[select.selectedIndex];
+                    dados = {
+                        itemId: selectedOption.value,
+                        itemTitulo: selectedOption.text,
+                        tipo: selectedOption.dataset.tipo,
+                        email: document.getElementById('email-destinatario').value,
+                        permissao: document.getElementById('permissao-compartilhamento').value
+                    };
+                    dbKey = 'db_compartilhamentos';
+                    renderFn = renderCompartilhados;
+                }
+                
+                let db = getDB(dbKey);
+                
+                if (editingId) { // MODO EDITAR
+                    db = db.map(i => i.id === editingId ? { id: i.id, ...dados } : i);
+                } else { // MODO ADICIONAR
+                    dados.id = `${type}-` + Date.now();
+                    db.push(dados);
+                }
+                
+                setDB(dbKey, db);
+                closeModal(form.closest('.modal'));
+                renderFn();
+            }
+
+            if (forms.senha) forms.senha.addEventListener('submit', (e) => handleSave(e, 'senha'));
+            if (forms.nota) forms.nota.addEventListener('submit', (e) => handleSave(e, 'nota'));
+            if (forms.cartao) forms.cartao.addEventListener('submit', (e) => handleSave(e, 'cartao'));
+            if (forms.endereco) forms.endereco.addEventListener('submit', (e) => handleSave(e, 'endereco'));
+            if (forms.documento) forms.documento.addEventListener('submit', (e) => handleSave(e, 'documento'));
+            
+            const formCompartilhar = document.querySelector('#modal-compartilhar form');
+            if (formCompartilhar) formCompartilhar.addEventListener('submit', (e) => handleSave(e, 'compartilhamento'));
+
+
+            // ==================================================================
+            // --- 7. LÓGICA DE EXCLUSÃO (Delete) ---
+            // ==================================================================
+            
+            function handleDelete(type) {
+                const form = forms[type];
+                if (!form) return; 
+                
+                const id = form.dataset.editingId;
+                if (!id) return;
+
+                let dbKey = `db_${type}s`;
+                if (type === 'cartao') dbKey = 'db_cartoes'; // Correção do bug
+                
+                if (confirm(`Tem certeza que deseja excluir este item?`)) {
+                    let db = getDB(dbKey);
+                    db = db.filter(i => i.id !== id);
+                    setDB(dbKey, db);
+                    
+                    closeModal(form.closest('.modal'));
+                    
+                    if (type === 'senha') renderSenhas();
+                    else if (type === 'nota') renderNotas();
+                    else if (type === 'cartao') renderCartoes();
+                    else if (type === 'endereco') renderEnderecos();
+                    else if (type === 'documento') renderDocumentos();
+                }
+            }
+            
+            document.getElementById('delete-senha-btn').addEventListener('click', () => handleDelete('senha'));
+            document.getElementById('delete-nota-btn').addEventListener('click', () => handleDelete('nota'));
+            document.getElementById('delete-cartao-btn').addEventListener('click', () => handleDelete('cartao'));
+            document.getElementById('delete-endereco-btn').addEventListener('click', () => handleDelete('endereco'));
+            document.getElementById('delete-documento-btn').addEventListener('click', () => handleDelete('documento'));
+
+            // ==================================================================
+            // --- 8. LÓGICAS ESPECÍFICAS (Relatório, Compartilhar, Copiar) ---
+            // ==================================================================
+            
+            function addAlterarSenhaListeners() {
+                const alterarSenhaBtns = document.querySelectorAll('#page-relatorios .alterar-senha-btn');
+                alterarSenhaBtns.forEach(btn => {
+                    const newBtn = btn.cloneNode(true);
+                    btn.parentNode.replaceChild(newBtn, btn);
+                    
+                    newBtn.addEventListener('click', (e) => {
+                        const itemContainer = newBtn.closest('[data-item-id]');
+                        if (!itemContainer) return; 
+                        const id = itemContainer.dataset.itemId;
+                        handleEdit('senha', id); 
+                    });
+                });
+            }
+            
+            function populateCompartilharSelect() {
+                const select = document.getElementById('item-a-compartilhar');
+                if (!select) return;
+                
+                const senhas = getDB('db_senhas');
+                const notas = getDB('db_notas');
+                
+                select.innerHTML = '<option value="">-- Selecione um item --</option>';
+                
+                if (senhas.length > 0) {
+                    const optgroup = document.createElement('optgroup');
+                    optgroup.label = 'Senhas';
+                    senhas.forEach(s => {
+                        optgroup.innerHTML += `<option value="${s.id}" data-tipo="senha">${s.titulo} (${s.login})</option>`;
+                    });
+                    select.appendChild(optgroup);
+                }
+                
+                if (notas.length > 0) {
+                    const optgroup = document.createElement('optgroup');
+                    optgroup.label = 'Notas Seguras';
+                    notas.forEach(n => {
+                        optgroup.innerHTML += `<option value="${n.id}" data-tipo="nota">${n.titulo}</option>`;
+                    });
+                    select.appendChild(optgroup);
+                }
+            }
+            
+            // Listener para o input de file
+            const fileInput = document.getElementById('file-upload');
+            const fileInputText = document.getElementById('file-upload-text');
+            if (fileInput && fileInputText) {
+                fileInput.addEventListener('change', () => {
+                    if (fileInput.files.length > 0) {
+                        fileInputText.textContent = fileInput.files[0].name;
+                    } else {
+                        fileInputText.textContent = 'Selecione um arquivo';
+                    }
+                });
+            }
+            
+            // *** NOVA FUNÇÃO PARA BOTÕES DE COPIAR ***
+            function setupCopyButtons() {
+                const allCopyButtons = document.querySelectorAll('.copy-btn-modal');
+                
+                allCopyButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const targetId = btn.dataset.copyTarget;
+                        const targetInput = document.querySelector(targetId);
+                        
+                        if (targetInput && targetInput.value) {
+                            navigator.clipboard.writeText(targetInput.value)
+                                .then(() => {
+                                    const icon = btn.querySelector('ion-icon');
+                                    if (icon) {
+                                        icon.setAttribute('name', 'checkmark-done-outline');
+                                        icon.classList.add('text-green-500');
+                                    }
+                                    setTimeout(() => {
+                                        if (icon) {
+                                            icon.setAttribute('name', 'clipboard-outline');
+                                            icon.classList.remove('text-green-500');
+                                        }
+                                    }, 2000);
+                                })
+                                .catch(err => {
+                                    console.error('Falha ao copiar: ', err);
+                                });
+                        }
+                    });
+                });
+            }
+
+            // ==================================================================
+            // --- 9. INICIALIZAÇÃO ---
+            // ==================================================================
+            
+            setupCopyButtons(); // Ativa todos os botões de copiar
+            document.querySelector('.nav-l1-item[data-target-l1="cofre-pessoal"]').click(); // Inicia a aplicação
+
+        });
+    </script>
+        
+</body>
+</html>
