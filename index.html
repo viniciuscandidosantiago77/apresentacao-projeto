@@ -2,26 +2,81 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Apresentação do Projeto</title>
+  <title>Projeto • Sistema Web</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.55);
+      padding: 40px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 28px;
+      color: #00ffff;
+    }
+
+    p {
+      margin-bottom: 30px;
+      color: #cccccc;
+    }
+
+    .links a {
+      display: block;
+      text-decoration: none;
+      margin: 12px 0;
+      padding: 12px;
+      border-radius: 8px;
+      background: #00ffff;
+      color: #000;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .links a:hover {
+      background: #00b3b3;
+      transform: scale(1.03);
+    }
+
+    footer {
+      margin-top: 25px;
+      font-size: 12px;
+      color: #aaaaaa;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Apresentação do Projeto</h1>
-  <p>Site criado para apresentar as páginas do sistema.</p>
+  <div class="container">
+    <h1>🚀 Sistema Web</h1>
+    <p>Projeto desenvolvido para demonstrar cadastro, login e navegação do sistema.</p>
 
-  <h2>Páginas do sistema</h2>
-  <ul>
-    <li><a href="login.html">🔐 Login</a></li>
-    <li><a href="cadastro.html">📝 Cadastro</a></li>
-    <li><a href="app.html">📊 Aplicação</a></li>
-  </ul>
+    <div class="links">
+      <a href="login.html">🔐 Tela de Login</a>
+      <a href="cadastro.html">📝 Tela de Cadastro</a>
+      <a href="app.html">📊 Área do Sistema</a>
+      <a href="Projeto apresentação (1).pdf" target="_blank">📄 Documentação do Projeto</a>
+    </div>
 
-  <h2>Documentação</h2>
-  <ul>
-    <li>
-      <a href="Projeto apresentação (1).pdf" target="_blank">
-        📄 Abrir PDF do Projeto
-      </a>
-    </li>
-  </ul>
+    <footer>
+      © Projeto acadêmico • GitHub Pages
+    </footer>
+  </div>
 </body>
 </html>
